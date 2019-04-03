@@ -15,6 +15,7 @@ namespace projeto_calculadora
         public FrmPrincipal()
         {
             InitializeComponent();
+            PnlFundo.Focus();
         }
         private void LimparTxtResultado()
         {
@@ -32,6 +33,7 @@ namespace projeto_calculadora
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             LimparCampos();
+            PnlFundo.Focus();
         }
 
         private bool VerificaSeIgualZero()
@@ -99,8 +101,9 @@ namespace projeto_calculadora
                 LimparTxtResultado();
                 _PressionouIgual = false;
             }
-            if (VerificaSeIgualZero()) TxtResultado.Text = valor;
+            if (VerificaSeIgualZero()) TxtResultado.Text += valor;
             else TxtResultado.Text += valor;
+            PnlFundo.Focus();
         }
 
         private void AdicionarOperacao(string operacao)
@@ -126,7 +129,7 @@ namespace projeto_calculadora
 
         private void BtnZero_Click(object sender, EventArgs e)
         {
-            if (!VerificaSeIgualZero()) TxtResultado.Text = TxtResultado.Text + "0";
+            if (!VerificaSeIgualZero()) TxtResultado.Text += "0";
         }
 
         private void BtnUm_Click(object sender, EventArgs e)
@@ -290,6 +293,24 @@ namespace projeto_calculadora
                 TxtResultado.Text = Resultado.ToString().Replace(",", ".");
                 _PressionouIgual = true;
             }
+        }
+
+        private void PnlFundo_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete) BtnLimpar_Click(BtnLimpar, new EventArgs());
+            if (e.KeyCode == Keys.Enter) BtnIgual_Click(BtnIgual, new EventArgs());
+            if (e.KeyCode == Keys.Back) BtnRemoveUltimo_Click(BtnRemoveUltimo, new EventArgs());
+            if (e.KeyCode == Keys.D0 || e.KeyCode == Keys.NumPad0) BtnZero_Click(BtnZero, new EventArgs());
+            if (e.KeyCode == Keys.D1 || e.KeyCode == Keys.NumPad1) BtnUm_Click(BtnUm, new EventArgs());
+            if (e.KeyCode == Keys.D2 || e.KeyCode == Keys.NumPad2) BtnDois_Click(BtnDois, new EventArgs());
+            if (e.KeyCode == Keys.D3 || e.KeyCode == Keys.NumPad3) BtnTres_Click(BtnTres, new EventArgs());
+            if (e.KeyCode == Keys.D4 || e.KeyCode == Keys.NumPad4) BtnQuatro_Click(BtnQuatro, new EventArgs());
+            if (e.KeyCode == Keys.D5 || e.KeyCode == Keys.NumPad5) BtnCinco_Click(BtnCinco, new EventArgs());
+            if (e.KeyCode == Keys.D6 || e.KeyCode == Keys.NumPad6) BtnSeis_Click(BtnSeis, new EventArgs());
+            if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7) BtnSete_Click(BtnSete, new EventArgs());
+            if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8) BtnOito_Click(BtnOito, new EventArgs());
+            if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9) BtnNove_Click(BtnNove, new EventArgs());
+
         }
     }
 }

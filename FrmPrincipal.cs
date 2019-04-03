@@ -119,6 +119,7 @@ namespace projeto_calculadora
             {
                 MessageBox.Show("Precisar ser inserido algum valor", this.Text, MessageBoxButtons.OK, MessageBoxIcon.Information);
             }
+            PnlFundo.Focus();
         }
 
         public double CalcularPotencia(double valorBase, double valorExpoente)
@@ -213,6 +214,7 @@ namespace projeto_calculadora
                 CalcularResultado();
                 _PressionouIgual = true;
             }
+            PnlFundo.Focus();
         }
 
         private void BtnPonto_Click(object sender, EventArgs e)
@@ -226,22 +228,26 @@ namespace projeto_calculadora
             if (VerificaSeVazio()) TxtResultado.Text = "0.";
             if (VerificaSeTemPonto()) return;
             TxtResultado.Text += ".";
+            PnlFundo.Focus();
         }
 
         private void BtnLimpar_Click(object sender, EventArgs e)
         {
             LimparCampos();
+            PnlFundo.Focus();
         }
 
         private void BtnLimpaUltimoValor_Click(object sender, EventArgs e)
         {
             if (_Operacao.Equals(string.Empty) || _PressionouIgual) LimparCampos();
             else LimparTxtResultado();
+            PnlFundo.Focus();
         }
 
         private void BtnTrocaSinal_Click(object sender, EventArgs e)
         {
             if (!VerificaSeVazio()) TxtResultado.Text = (Convert.ToDouble(TxtResultado.Text.Trim().Replace(".", ",")) * (-1)).ToString().Replace(",", ".");
+            PnlFundo.Focus();
         }
 
         private void BtnRemoveUltimo_Click(object sender, EventArgs e)
@@ -250,6 +256,7 @@ namespace projeto_calculadora
             string Texto = TxtResultado.Text.Trim();
             LimparTxtResultado();
             for (int i = 0; i < Tamanho - 1; i++) TxtResultado.Text += Texto[i];
+            PnlFundo.Focus();
         }
 
         private void BtnElevadoQuadrado_Click(object sender, EventArgs e)
@@ -261,6 +268,7 @@ namespace projeto_calculadora
                 TxtResultado.Text = Resultado.ToString().Replace(",", ".");
                 _PressionouIgual = true;
             }
+            PnlFundo.Focus();
         }
 
         private void BtnPotencia_Click(object sender, EventArgs e)
@@ -277,6 +285,7 @@ namespace projeto_calculadora
                 TxtResultado.Text = Resultado.ToString().Replace(",", ".");
                 _PressionouIgual = true;
             }
+            PnlFundo.Focus();
         }
 
         private void btn1x_Click(object sender, EventArgs e)
@@ -293,6 +302,7 @@ namespace projeto_calculadora
                 TxtResultado.Text = Resultado.ToString().Replace(",", ".");
                 _PressionouIgual = true;
             }
+            PnlFundo.Focus();
         }
 
         private void PnlFundo_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
@@ -310,7 +320,10 @@ namespace projeto_calculadora
             if (e.KeyCode == Keys.D7 || e.KeyCode == Keys.NumPad7) BtnSete_Click(BtnSete, new EventArgs());
             if (e.KeyCode == Keys.D8 || e.KeyCode == Keys.NumPad8) BtnOito_Click(BtnOito, new EventArgs());
             if (e.KeyCode == Keys.D9 || e.KeyCode == Keys.NumPad9) BtnNove_Click(BtnNove, new EventArgs());
-
+            if (e.KeyCode == Keys.Divide) BtnDividir_Click(BtnDividir, new EventArgs());
+            if (e.KeyCode == Keys.Multiply) BtnMultiplicar_Click(BtnMultiplicar, new EventArgs());
+            if (e.KeyCode == Keys.Add) BtnSomar_Click(BtnSomar, new EventArgs());
+            if (e.KeyCode == Keys.LControlKey + e.KeyCode == Keys.Divide) btn1x_Click(btn1x, new EventArgs());
         }
     }
 }

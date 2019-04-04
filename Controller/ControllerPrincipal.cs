@@ -191,7 +191,7 @@ namespace projeto_calculadora.Controller
         // Ação quando o botão <-- é pressionado
         internal void ActionLimpaUltimoValor()
         {
-            if (_Operacao.Equals(string.Empty) || _PressionouIgual) LimparCampos();
+            if (_Operacao.Equals(string.Empty) || VerificaSeIgualPressionado()) LimparCampos();
             else LimparTxtResultado();
             Pnl.Focus();
 

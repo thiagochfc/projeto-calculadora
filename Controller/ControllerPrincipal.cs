@@ -59,7 +59,7 @@ namespace projeto_calculadora.Controller
         }
 
         // Verifica se o igual foi pressionado
-        private bool VeriricaSeIgualPressionado()
+        private bool VerificaSeIgualPressionado()
         {
             if (_PressionouIgual) return true;
             else return false;
@@ -117,12 +117,11 @@ namespace projeto_calculadora.Controller
         // Insere o valor
         internal void InserirValor(string valor)
         {
-            if (VeriricaSeIgualPressionado())
+            if (VerificaSeIgualPressionado())
             {
                 _PressionouIgual = false;
             }
-            if (VerificaSeIgualZero()) Txt.Text += valor;
-            else Txt.Text += valor;
+            Txt.Text += valor;
             Pnl.Focus();
         }
 
@@ -153,7 +152,7 @@ namespace projeto_calculadora.Controller
         // Ação quando o botão igual é pressionado
         internal void ActionIgual()
         {
-            if (_PressionouIgual)
+            if (VerificaSeIgualPressionado())
             {
                 LimparTxtResultado();
                 _PressionouIgual = false;
@@ -172,14 +171,19 @@ namespace projeto_calculadora.Controller
         // Ação qundo o botão . é pressionado
         internal void ActionPonto()
         {
-            if (_PressionouIgual)
+            if (VerificaSeIgualPressionado())
             {
                 Txt.Text += "0.";
                 _PressionouIgual = false;
+                Pnl.Focus();
                 return;
             }
             if (VerificaSeVazio()) Txt.Text += "0.";
-            if (VerificaSeTemPonto()) return;
+            if (VerificaSeTemPonto())
+            {
+                Pnl.Focus();
+                return;
+            }
             Txt.Text += ".";
             Pnl.Focus();
         }

@@ -11,8 +11,8 @@ namespace projeto_calculadora.View
 
         public FrmPrincipal()
         {
-            PnlFundo.Focus();
             InitializeComponent();
+            PnlFundo.Focus();
         }
 
 

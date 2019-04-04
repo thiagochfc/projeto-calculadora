@@ -49,24 +49,36 @@ namespace projeto_calculadora.Controller
         }
 
         // Verifica se Txt está vázio
-        internal bool VerificaSeVazio()
+        private bool VerificaSeVazio()
         {
             if (Txt.Text.Trim().Equals(string.Empty)) return true;
             else return false;
         }
 
         // Verifica se tem . no Txt
-        internal bool VerificaSeTemPonto()
+        private bool VerificaSeTemPonto()
         {
             if (Txt.Text.Trim().Contains(".")) return true;
             else return false;
         }
 
         // Verifica se o igual foi pressionado
-        internal bool VeriricaSeIgualPressionado(bool pressionouIgual)
+        private bool VeriricaSeIgualPressionado(bool pressionouIgual)
         {
             if (pressionouIgual) return true;
             else return false;
+        }
+
+        // Remove a operação do Txt na hora da soma
+        private string RemoveOperacaoTxt(string txt)
+        {
+            if (txt.Contains("/") || txt.Contains("*") || txt.Contains("+") || txt.Contains("-") || txt.Contains("^"))
+            {
+                double nmrUm = Convert.ToDouble(_NumeroUm.ToString().Trim().Length + 1);
+                double nmrDois = Convert.ToDouble(txt.Trim().Length);
+                return txt.Substring(Convert.ToInt16(nmrUm), Convert.ToInt16(nmrDois - nmrUm));
+            }
+            else return txt;
         }
 
         // Calcula o Resultado
@@ -101,6 +113,7 @@ namespace projeto_calculadora.Controller
                 break;
 
             }
+            LimparTxtResultado();
             Txt.Text = _Resultado.ToString().Replace(",", ".");
             Pnl.Focus();
         }
@@ -125,8 +138,9 @@ namespace projeto_calculadora.Controller
             {
                 if (VerificaSeTemPonto()) _NumeroUm = Convert.ToDouble(Txt.Text.Trim().Replace(".", ","));
                 else _NumeroUm = Convert.ToDouble(Txt.Text.Trim());
+
                 _Operacao = operacao;
-                LimparTxtResultado();
+                Txt.Text += _Operacao;
             }
             else
             {
@@ -152,9 +166,8 @@ namespace projeto_calculadora.Controller
             }
             if (!VerificaSeVazio())
             {
-
-                if (VerificaSeTemPonto()) _NumeroDois = Convert.ToDouble(Txt.Text.Trim().Replace(".", ","));
-                else _NumeroDois = Convert.ToDouble(Txt.Text.Trim());
+                if (VerificaSeTemPonto()) _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim()).Replace(".", ","));
+                else _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim()).Replace(".", ","));
                 CalcularResultado(_Operacao);
                 _PressionouIgual = true;
             }

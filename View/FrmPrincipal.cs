@@ -7,7 +7,7 @@ namespace projeto_calculadora.View
     public partial class FrmPrincipal : Form
     {
 
-        ControllerPrincipal controller;
+        private ControllerPrincipal controller;
 
         public FrmPrincipal()
         {
@@ -15,11 +15,8 @@ namespace projeto_calculadora.View
             PnlFundo.Focus();
         }
 
-
-
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            PnlFundo.Focus();
             controller = new ControllerPrincipal(TxtResultado, PnlFundo);
             controller.LimparTxtResultado();
             controller.LimparCampos();
@@ -37,7 +34,7 @@ namespace projeto_calculadora.View
         private void BtnTres_Click(object sender, EventArgs e) => controller.InserirValor("3");
 
         private void BtnQuatro_Click(object sender, EventArgs e) => controller.InserirValor("4");
-        
+
         private void BtnCinco_Click(object sender, EventArgs e) => controller.InserirValor("5");
 
         private void BtnSeis_Click(object sender, EventArgs e) => controller.InserirValor("6");
@@ -56,63 +53,29 @@ namespace projeto_calculadora.View
 
         private void BtnSomar_Click(object sender, EventArgs e) => controller.AdicionarOperacao("+");
 
-        private void BtnIgual_Click(object sender, EventArgs e)
-        {
-            controller.ActionIgual();
-            PnlFundo.Focus();
-        }
+        private void BtnIgual_Click(object sender, EventArgs e) => controller.ActionIgual();
 
-        private void BtnPonto_Click(object sender, EventArgs e)
-        {
-            controller.ActionPonto();
-            PnlFundo.Focus();
-        }
+        private void BtnPonto_Click(object sender, EventArgs e) => controller.ActionPonto();
 
         private void BtnLimpar_Click(object sender, EventArgs e)
         {
             controller.LimparCampos();
             controller.LimparTxtResultado();
-            PnlFundo.Focus();
         }
 
-        private void BtnLimpaUltimoValor_Click(object sender, EventArgs e)
-        {
-            controller.ActionLimpaUltimoValor();
-            PnlFundo.Focus();
-        }
+        private void BtnLimpaUltimoValor_Click(object sender, EventArgs e) => controller.ActionLimpaUltimoValor();
 
-        private void BtnTrocaSinal_Click(object sender, EventArgs e)
-        {
-            controller.ActionTrocaSinal();
-            PnlFundo.Focus();
-        }
+        private void BtnTrocaSinal_Click(object sender, EventArgs e) => controller.ActionTrocaSinal();
 
-        private void BtnRemoveUltimo_Click(object sender, EventArgs e)
-        {
-            int Tamanho = TxtResultado.Text.Trim().Length;
-            controller.ActionRemoveUltimo(Tamanho);
-            PnlFundo.Focus();
-        }
+        private void BtnRemoveUltimo_Click(object sender, EventArgs e) => controller.ActionRemoveUltimo();
 
-        private void BtnElevadoQuadrado_Click(object sender, EventArgs e)
-        {
-            controller.ActionElevaQuadrado();
-            PnlFundo.Focus();
-        }
+        private void BtnElevadoQuadrado_Click(object sender, EventArgs e) => controller.ActionElevaQuadrado();
 
         private void BtnPotencia_Click(object sender, EventArgs e) => controller.AdicionarOperacao("^");
 
-        private void BtnRaiz_Click(object sender, EventArgs e)
-        {
-            controller.ActionRaiz();
-            PnlFundo.Focus();
-        }
+        private void BtnRaiz_Click(object sender, EventArgs e) => controller.ActionRaiz();
 
-        private void Btn1x_Click(object sender, EventArgs e)
-        {
-            controller.Action1x();
-            PnlFundo.Focus();
-        }
+        private void Btn1x_Click(object sender, EventArgs e) => controller.Action1x();
 
         private void PnlFundo_PreviewKeyDown(object sender, PreviewKeyDownEventArgs e)
         {

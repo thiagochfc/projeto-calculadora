@@ -1,8 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace projeto_calculadora.Controller
@@ -63,9 +59,9 @@ namespace projeto_calculadora.Controller
         }
 
         // Verifica se o igual foi pressionado
-        private bool VeriricaSeIgualPressionado(bool pressionouIgual)
+        private bool VeriricaSeIgualPressionado()
         {
-            if (pressionouIgual) return true;
+            if (_PressionouIgual) return true;
             else return false;
         }
 
@@ -121,7 +117,7 @@ namespace projeto_calculadora.Controller
         // Insere o valor
         internal void InserirValor(string valor)
         {
-            if (VeriricaSeIgualPressionado(_PressionouIgual))
+            if (VeriricaSeIgualPressionado())
             {
                 LimparTxtResultado();
                 _PressionouIgual = false;
@@ -206,9 +202,10 @@ namespace projeto_calculadora.Controller
         }
 
         // Ação quando o botão LimpaUltimo é pressionado
-        internal void ActionRemoveUltimo(int tamanho)
+        internal void ActionRemoveUltimo()
         {
             string Texto = Txt.Text.Trim();
+            int tamanho = Texto.Trim().Length;
             LimparTxtResultado();
             for (int i = 0; i < tamanho - 1; i++) Txt.Text += Texto[i];
             Pnl.Focus();

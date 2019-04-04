@@ -174,11 +174,11 @@ namespace projeto_calculadora.Controller
         {
             if (_PressionouIgual)
             {
-                Txt.Text = "0.";
+                Txt.Text += "0.";
                 _PressionouIgual = false;
                 return;
             }
-            if (VerificaSeVazio()) Txt.Text = "0.";
+            if (VerificaSeVazio()) Txt.Text += "0.";
             if (VerificaSeTemPonto()) return;
             Txt.Text += ".";
             Pnl.Focus();

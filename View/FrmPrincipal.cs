@@ -7,109 +7,110 @@ namespace projeto_calculadora.View
     public partial class FrmPrincipal : Form
     {
 
-        ControllerPrincipal controller = new ControllerPrincipal();
+        ControllerPrincipal controller;
 
         public FrmPrincipal()
         {
-            InitializeComponent();
             PnlFundo.Focus();
+            InitializeComponent();
         }
 
-        private void LimparTxtResultado() => controller.LimparTxtResultado(TxtResultado);
+
 
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
-            LimparTxtResultado();
-            controller.LimparCampos();
             PnlFundo.Focus();
+            controller = new ControllerPrincipal(TxtResultado, PnlFundo);
+            controller.LimparTxtResultado();
+            controller.LimparCampos();
         }
 
         private void BtnZero_Click(object sender, EventArgs e)
         {
-            if (!controller.VerificaSeIgualZero(TxtResultado)) TxtResultado.Text += "0";
+            if (!controller.VerificaSeIgualZero()) TxtResultado.Text += "0";
         }
 
-        private void BtnUm_Click(object sender, EventArgs e) => controller.InserirValor("1", TxtResultado);
+        private void BtnUm_Click(object sender, EventArgs e) => controller.InserirValor("1");
 
-        private void BtnDois_Click(object sender, EventArgs e) => controller.InserirValor("2", TxtResultado);
+        private void BtnDois_Click(object sender, EventArgs e) => controller.InserirValor("2");
 
-        private void BtnTres_Click(object sender, EventArgs e) => controller.InserirValor("3", TxtResultado);
+        private void BtnTres_Click(object sender, EventArgs e) => controller.InserirValor("3");
 
-        private void BtnQuatro_Click(object sender, EventArgs e) => controller.InserirValor("4", TxtResultado);
+        private void BtnQuatro_Click(object sender, EventArgs e) => controller.InserirValor("4");
         
-        private void BtnCinco_Click(object sender, EventArgs e) => controller.InserirValor("5", TxtResultado);
+        private void BtnCinco_Click(object sender, EventArgs e) => controller.InserirValor("5");
 
-        private void BtnSeis_Click(object sender, EventArgs e) => controller.InserirValor("6", TxtResultado);
+        private void BtnSeis_Click(object sender, EventArgs e) => controller.InserirValor("6");
 
-        private void BtnSete_Click(object sender, EventArgs e) => controller.InserirValor("7", TxtResultado);
+        private void BtnSete_Click(object sender, EventArgs e) => controller.InserirValor("7");
 
-        private void BtnOito_Click(object sender, EventArgs e) => controller.InserirValor("8", TxtResultado);
+        private void BtnOito_Click(object sender, EventArgs e) => controller.InserirValor("8");
 
-        private void BtnNove_Click(object sender, EventArgs e) => controller.InserirValor("9", TxtResultado);
+        private void BtnNove_Click(object sender, EventArgs e) => controller.InserirValor("9");
 
-        private void BtnDividir_Click(object sender, EventArgs e) => controller.AdicionarOperacao("/", TxtResultado);
+        private void BtnDividir_Click(object sender, EventArgs e) => controller.AdicionarOperacao("/");
 
-        private void BtnMultiplicar_Click(object sender, EventArgs e) => controller.AdicionarOperacao("*", TxtResultado);
+        private void BtnMultiplicar_Click(object sender, EventArgs e) => controller.AdicionarOperacao("*");
 
-        private void BtnSubtrair_Click(object sender, EventArgs e) => controller.AdicionarOperacao("-", TxtResultado);
+        private void BtnSubtrair_Click(object sender, EventArgs e) => controller.AdicionarOperacao("-");
 
-        private void BtnSomar_Click(object sender, EventArgs e) => controller.AdicionarOperacao("+", TxtResultado);
+        private void BtnSomar_Click(object sender, EventArgs e) => controller.AdicionarOperacao("+");
 
         private void BtnIgual_Click(object sender, EventArgs e)
         {
-            controller.ActionIgual(TxtResultado);
+            controller.ActionIgual();
             PnlFundo.Focus();
         }
 
         private void BtnPonto_Click(object sender, EventArgs e)
         {
-            controller.ActionPonto(TxtResultado);
+            controller.ActionPonto();
             PnlFundo.Focus();
         }
 
         private void BtnLimpar_Click(object sender, EventArgs e)
         {
             controller.LimparCampos();
-            LimparTxtResultado();
+            controller.LimparTxtResultado();
             PnlFundo.Focus();
         }
 
         private void BtnLimpaUltimoValor_Click(object sender, EventArgs e)
         {
-            controller.ActionLimpaUltimoValor(TxtResultado);
+            controller.ActionLimpaUltimoValor();
             PnlFundo.Focus();
         }
 
         private void BtnTrocaSinal_Click(object sender, EventArgs e)
         {
-            controller.ActionTrocaSinal(TxtResultado);
+            controller.ActionTrocaSinal();
             PnlFundo.Focus();
         }
 
         private void BtnRemoveUltimo_Click(object sender, EventArgs e)
         {
             int Tamanho = TxtResultado.Text.Trim().Length;
-            controller.ActionRemoveUltimo(Tamanho, TxtResultado);
+            controller.ActionRemoveUltimo(Tamanho);
             PnlFundo.Focus();
         }
 
         private void BtnElevadoQuadrado_Click(object sender, EventArgs e)
         {
-            controller.ActionElevaQuadrado(TxtResultado);
+            controller.ActionElevaQuadrado();
             PnlFundo.Focus();
         }
 
-        private void BtnPotencia_Click(object sender, EventArgs e) => controller.AdicionarOperacao("^", TxtResultado);
+        private void BtnPotencia_Click(object sender, EventArgs e) => controller.AdicionarOperacao("^");
 
         private void BtnRaiz_Click(object sender, EventArgs e)
         {
-            controller.ActionRaiz(TxtResultado);
+            controller.ActionRaiz();
             PnlFundo.Focus();
         }
 
         private void Btn1x_Click(object sender, EventArgs e)
         {
-            controller.Action1x(TxtResultado);
+            controller.Action1x();
             PnlFundo.Focus();
         }
 
@@ -131,7 +132,7 @@ namespace projeto_calculadora.View
             if (e.KeyCode == Keys.Divide) BtnDividir_Click(BtnDividir, new EventArgs());
             if (e.KeyCode == Keys.Multiply) BtnMultiplicar_Click(BtnMultiplicar, new EventArgs());
             if (e.KeyCode == Keys.Add) BtnSomar_Click(BtnSomar, new EventArgs());
-
+            if (e.KeyCode == Keys.Subtract) BtnSubtrair_Click(BtnSubtrair, new EventArgs());
         }
     }
 }

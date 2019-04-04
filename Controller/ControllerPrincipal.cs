@@ -119,7 +119,6 @@ namespace projeto_calculadora.Controller
         {
             if (VeriricaSeIgualPressionado())
             {
-                LimparTxtResultado();
                 _PressionouIgual = false;
             }
             if (VerificaSeIgualZero()) Txt.Text += valor;

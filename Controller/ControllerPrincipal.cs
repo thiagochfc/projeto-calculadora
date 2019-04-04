@@ -74,9 +74,9 @@ namespace projeto_calculadora.Controller
         {
             if (txt.Contains("/") || txt.Contains("*") || txt.Contains("+") || txt.Contains("-") || txt.Contains("^"))
             {
-                double nmrUm = Convert.ToDouble(_NumeroUm.ToString().Trim().Length + 1);
-                double nmrDois = Convert.ToDouble(txt.Trim().Length);
-                return txt.Substring(Convert.ToInt16(nmrUm), Convert.ToInt16(nmrDois - nmrUm));
+                int nmrUm = _NumeroUm.ToString().Trim().Length + 1;
+                int nmrDois = txt.Trim().Length;
+                return txt.Substring(nmrUm, nmrDois - nmrUm);
             }
             else return txt;
         }

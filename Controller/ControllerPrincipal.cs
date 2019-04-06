@@ -21,7 +21,7 @@ namespace projeto_calculadora.Controller
         }
 
         // Limpa todos os campos
-        internal void LimparCampos()
+        private void LimparCampos()
         {
             _NumeroUm = 0;
             _NumeroDois = 0;
@@ -31,38 +31,41 @@ namespace projeto_calculadora.Controller
         }
 
         // Limpa o TxtResultado
-        internal void LimparTxtResultado()
+        private void LimparTxtResultado()
         {
             Txt.Clear();
             Pnl.Focus();
         }
 
-        // Verifica se Txt é igual a zer
-        internal bool VerificaSeIgualZero()
+        // Limpa tudo
+        internal void LimparTudo()
         {
-            if (Txt.Text.Trim().Equals("0")) return true;
-            else return false;
+            LimparCampos();
+            LimparTxtResultado();
+        }
+
+        // Verifica se Txt é igual a zer
+        private bool VerificaSeIgualZero()
+        {
+            return Txt.Text.Trim().Equals("0") ? true : false;
         }
 
         // Verifica se Txt está vázio
         private bool VerificaSeVazio()
         {
-            if (Txt.Text.Trim().Equals(string.Empty)) return true;
-            else return false;
+            return Txt.Text.Trim().Equals(string.Empty) ? true : false;
         }
 
         // Verifica se tem . no Txt
         private bool VerificaSeTemPonto()
         {
-            if (Txt.Text.Trim().Contains(".")) return true;
-            else return false;
+            return Txt.Text.Trim().Contains(".") ? true : false;
         }
 
         // Verifica se o igual foi pressionado
         private bool VerificaSeIgualPressionado()
         {
-            if (_PressionouIgual) return true;
-            else return false;
+            return _PressionouIgual ? true : false;
         }
 
         // Remove a operação do Txt na hora da soma
@@ -147,6 +150,12 @@ namespace projeto_calculadora.Controller
         private double CalcularPotencia(double valorBase, double valorExpoente)
         {
             return Math.Pow(valorBase, valorExpoente);
+        }
+
+        // Ação quando o botão zero é pressionado
+        internal void ActionZero()
+        {
+            if (!VerificaSeIgualZero()) Txt.Text += "0";
         }
 
         // Ação quando o botão igual é pressionado

@@ -18,14 +18,10 @@ namespace projeto_calculadora.View
         private void FrmPrincipal_Load(object sender, EventArgs e)
         {
             controller = new ControllerPrincipal(TxtResultado, PnlFundo);
-            controller.LimparTxtResultado();
-            controller.LimparCampos();
+            controller.LimparTudo();
         }
 
-        private void BtnZero_Click(object sender, EventArgs e)
-        {
-            if (!controller.VerificaSeIgualZero()) TxtResultado.Text += "0";
-        }
+        private void BtnZero_Click(object sender, EventArgs e) => controller.ActionZero();
 
         private void BtnUm_Click(object sender, EventArgs e) => controller.InserirValor("1");
 
@@ -57,11 +53,7 @@ namespace projeto_calculadora.View
 
         private void BtnPonto_Click(object sender, EventArgs e) => controller.ActionPonto();
 
-        private void BtnLimpar_Click(object sender, EventArgs e)
-        {
-            controller.LimparCampos();
-            controller.LimparTxtResultado();
-        }
+        private void BtnLimpar_Click(object sender, EventArgs e) => controller.LimparTudo();
 
         private void BtnLimpaUltimoValor_Click(object sender, EventArgs e) => controller.ActionLimpaUltimoValor();
 

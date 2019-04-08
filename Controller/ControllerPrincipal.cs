@@ -25,6 +25,7 @@ namespace projeto_calculadora.Controller
         {
             _NumeroUm = 0;
             _NumeroDois = 0;
+            Txt.Text = string.Empty;
             _Operacao = string.Empty;
             _PressionouIgual = false;
             Pnl.Focus();
@@ -56,7 +57,7 @@ namespace projeto_calculadora.Controller
             return Txt.Text.Trim().Equals(string.Empty) ? true : false;
         }
 
-        // Verifica se tem . no Txt
+        // Verifica se tem ponto no Txt
         private bool VerificaSeTemPonto()
         {
             return Txt.Text.Trim().Contains(".") ? true : false;
@@ -85,7 +86,7 @@ namespace projeto_calculadora.Controller
             else return txt;
         }
 
-        // Remove a operação do Txt na hora da soma
+        // Limpa o último número digitado após a função
         private string LimpaAposOperacao(string txt)
         {
             if (VerificaSeContemOperacoes(txt))

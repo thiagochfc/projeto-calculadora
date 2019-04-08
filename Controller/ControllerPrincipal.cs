@@ -68,14 +68,30 @@ namespace projeto_calculadora.Controller
             return _PressionouIgual ? true : false;
         }
 
+        // Verifica se contém as operações
+        private bool VerificaSeContemOperacoes(string txt)
+        {
+            return (txt.Contains("/") || txt.Contains("*") || txt.Contains("+") || txt.Contains("-") || txt.Contains("^")) ? true : false;
+        }
         // Remove a operação do Txt na hora da soma
         private string RemoveOperacaoTxt(string txt)
         {
-            if (txt.Contains("/") || txt.Contains("*") || txt.Contains("+") || txt.Contains("-") || txt.Contains("^"))
+            if (VerificaSeContemOperacoes(txt))
             {
                 int nmrUm = _NumeroUm.ToString().Trim().Length + 1;
                 int nmrDois = txt.Trim().Length;
                 return txt.Substring(nmrUm, nmrDois - nmrUm);
+            }
+            else return txt;
+        }
+
+        // Remove a operação do Txt na hora da soma
+        private string LimpaAposOperacao(string txt)
+        {
+            if (VerificaSeContemOperacoes(txt))
+            {
+                int nmrUm = _NumeroUm.ToString().Trim().Length + 1;
+                return txt.Substring(0, nmrUm);
             }
             else return txt;
         }
@@ -201,9 +217,8 @@ namespace projeto_calculadora.Controller
         internal void ActionLimpaUltimoValor()
         {
             if (_Operacao.Equals(string.Empty) || VerificaSeIgualPressionado()) LimparCampos();
-            else LimparTxtResultado();
+            else Txt.Text = LimpaAposOperacao(Txt.Text);
             Pnl.Focus();
-
         }
 
         // Ação quando o botão TrocaSinal é pressionado

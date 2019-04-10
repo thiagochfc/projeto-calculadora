@@ -187,8 +187,11 @@ namespace projeto_calculadora.Controller
             }
             if (!VerificaSeVazio())
             {
-                if (VerificaSeTemPonto()) _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim()).Replace(".", ","));
-                else _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim()).Replace(".", ","));
+                if (VerificaSeTemPonto())
+                {
+                    _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim().ToString().Replace(".", ",")));
+                }
+                else _NumeroDois = Convert.ToDouble(RemoveOperacaoTxt(Txt.Text.Trim().ToString().Replace(".", ",")));
                 CalcularResultado(_Operacao);
                 _PressionouIgual = true;
             }
@@ -204,12 +207,12 @@ namespace projeto_calculadora.Controller
 
             if (!antesOperacao.Contains("."))
             {
-                if (antesOperacao.Equals("") || antesOperacao[0].Equals("0"))
+                if (antesOperacao.Equals("") || antesOperacao[0].Equals("0") || VerificaSeContemOperacoes(antesOperacao))
                 {
                     Txt.Text += "0";
                 }
                 Txt.Text += ".";
-                
+
             }
             else if (!depoisOperacao.Contains("."))
             {

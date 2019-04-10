@@ -74,6 +74,7 @@ namespace projeto_calculadora.Controller
         {
             return (txt.Contains("/") || txt.Contains("*") || txt.Contains("+") || txt.Contains("-") || txt.Contains("^")) ? true : false;
         }
+
         // Remove a operação do Txt na hora da soma
         private string RemoveOperacaoTxt(string txt)
         {
@@ -86,7 +87,7 @@ namespace projeto_calculadora.Controller
             else return txt;
         }
 
-        // Limpa o último número digitado após a função
+        // Limpa o último número digitado após a operação
         private string LimpaAposOperacao(string txt)
         {
             if (VerificaSeContemOperacoes(txt))
@@ -197,20 +198,28 @@ namespace projeto_calculadora.Controller
         // Ação qundo o botão . é pressionado
         internal void ActionPonto()
         {
-            if (VerificaSeIgualPressionado())
+
+            string antesOperacao = LimpaAposOperacao(Txt.Text.Trim());
+            string depoisOperacao = RemoveOperacaoTxt(Txt.Text.Trim());
+
+            if (!antesOperacao.Contains("."))
             {
-                Txt.Text += "0.";
-                _PressionouIgual = false;
-                Pnl.Focus();
-                return;
+                if (antesOperacao.Equals("") || antesOperacao[0].Equals("0"))
+                {
+                    Txt.Text += "0";
+                }
+                Txt.Text += ".";
+                
             }
-            if (VerificaSeVazio()) Txt.Text += "0.";
-            if (VerificaSeTemPonto())
+            else if (!depoisOperacao.Contains("."))
             {
-                Pnl.Focus();
-                return;
+                if (depoisOperacao.Equals("") || depoisOperacao[0].Equals("0"))
+                {
+                    Txt.Text += "0";
+                }
+                Txt.Text += ".";
             }
-            Txt.Text += ".";
+
             Pnl.Focus();
         }
 

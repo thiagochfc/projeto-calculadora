@@ -98,6 +98,23 @@ namespace projeto_calculadora.Controller
             else return txt;
         }
 
+        // Condição para aplicar o ponto
+        private void CondicaoAplicaZero(string antesOperacao, string depoisOperacao)
+        {
+            if (!antesOperacao.Contains("."))
+            {
+                if (antesOperacao.Equals("") || antesOperacao[0].Equals("0") || VerificaSeContemOperacoes(antesOperacao))
+                    Txt.Text += "0";
+                Txt.Text += ".";
+            }
+            else if (!depoisOperacao.Contains("."))
+            {
+                if (depoisOperacao.Equals("") || depoisOperacao[0].Equals("0"))
+                    Txt.Text += "0";
+                Txt.Text += ".";
+            }
+        }
+
         // Calcula o Resultado
         internal void CalcularResultado(string operacao)
         {
@@ -205,23 +222,7 @@ namespace projeto_calculadora.Controller
             string antesOperacao = LimpaAposOperacao(Txt.Text.Trim());
             string depoisOperacao = RemoveOperacaoTxt(Txt.Text.Trim());
 
-            if (!antesOperacao.Contains("."))
-            {
-                if (antesOperacao.Equals("") || antesOperacao[0].Equals("0") || VerificaSeContemOperacoes(antesOperacao))
-                {
-                    Txt.Text += "0";
-                }
-                Txt.Text += ".";
-
-            }
-            else if (!depoisOperacao.Contains("."))
-            {
-                if (depoisOperacao.Equals("") || depoisOperacao[0].Equals("0"))
-                {
-                    Txt.Text += "0";
-                }
-                Txt.Text += ".";
-            }
+            CondicaoAplicaZero(antesOperacao, depoisOperacao);
 
             Pnl.Focus();
         }
